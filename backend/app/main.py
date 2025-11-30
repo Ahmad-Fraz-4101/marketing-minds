@@ -22,6 +22,7 @@ origins = [
     "https://marketing-minds-three.vercel.app",
 ]
 
+#cors 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,  # or ["*"] to allow all
