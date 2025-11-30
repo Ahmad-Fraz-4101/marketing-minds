@@ -2,15 +2,16 @@ from fastapi import Depends, APIRouter, UploadFile, File, Form
 from sqlalchemy.orm import Session
 from datetime import datetime
 import requests, time
+from uuid import UUID as UUIDType
 
 from app.database import get_db
 from app.models import User
+from app.auth import get_user_id_from_token
 
 router = APIRouter()
 
 @router.post("/social/post-dynamic")
 def post_dynamic(
-    user_id: int = Form(...),
     post_to_facebook: bool = Form(False),
     post_to_instagram: bool = Form(False),
     message: str = Form(None),
@@ -18,12 +19,18 @@ def post_dynamic(
     schedule_minutes: int = Form(None),
     scheduled_datetime: str = Form(None),  # "2025-11-26T01:52:53"
     post_now: bool = Form(False),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    user_id: str = Depends(get_user_id_from_token)  # Get from JWT token
 ):
     # -------------------------
-    # 1. Get user
+    # 1. Get user by user_id (UUID from auth.users)
     # -------------------------
-    user = db.query(User).filter(User.id == user_id).first()
+    try:
+        user_uuid = UUIDType(user_id)
+    except ValueError:
+        return {"error": "Invalid user_id format. Expected UUID."}
+    
+    user = db.query(User).filter(User.user_id == user_uuid).first()
     if not user:
         return {"error": "User not found"}
 

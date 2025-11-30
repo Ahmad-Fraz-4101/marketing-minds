@@ -1,16 +1,26 @@
 from fastapi import Depends, APIRouter
 from sqlalchemy.orm import Session
 import requests
+from uuid import UUID as UUIDType
 
 from app.database import get_db
 from app.models import User
+from app.auth import get_user_id_from_token
+
 router = APIRouter()
 
 @router.get("/facebook/page-analytics")
-def get_page_post_analytics(user_id: int, db: Session = Depends(get_db)):
-
-    # 1. Get user from DB
-    user = db.query(User).filter(User.id == user_id).first()
+def get_page_post_analytics(
+    db: Session = Depends(get_db),
+    user_id: str = Depends(get_user_id_from_token)  # Get from JWT token
+):
+    # 1. Get user from DB by user_id (UUID from auth.users)
+    try:
+        user_uuid = UUIDType(user_id)
+    except ValueError:
+        return {"error": "Invalid user_id format. Expected UUID."}
+    
+    user = db.query(User).filter(User.user_id == user_uuid).first()
     if not user:
         return {"error": "User not found"}
 

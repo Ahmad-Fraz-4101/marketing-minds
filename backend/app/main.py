@@ -95,11 +95,14 @@ async def facebook_callback(request: Request, db: Session = Depends(get_db)):
 
     if user:
         user.session_token = long_token
+        # Note: user_id should be set when user signs up via Supabase auth
+        # If not set, you may need to link it here based on your auth flow
     else:
         user = User(
             facebook_id=facebook_id,
             name=name,
             session_token=long_token
+            # user_id will be set when user creates account via Supabase auth
         )
         db.add(user)
 
