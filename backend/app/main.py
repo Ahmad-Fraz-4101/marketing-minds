@@ -11,12 +11,24 @@ import requests
 from app.routes.facebook_analytics import router as analytics_router
 from app.routes.insta_analytics import router as insta_analytics_router
 from app.routes.post_scheduling import router as scheduling_router
-
+from fastapi.middleware.cors import CORSMiddleware
 
 
 load_dotenv()
 
 app = FastAPI()
+
+origins = [
+    "https://marketing-minds-three.vercel.app",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # or ["*"] to allow all
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.include_router(analytics_router)
 app.include_router(scheduling_router)
 app.include_router(insta_analytics_router)
