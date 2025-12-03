@@ -22,7 +22,7 @@ function SupportUs() {
           </div>
 
           <p className="text-gray-300 text-sm text-center mb-2">
-            Point your camera or payment app at this QR to support us.
+            Point your payment app's (easypaisa, jazzcash or bank account) scanner at this QR to support us.
           </p>
           
         </div>
