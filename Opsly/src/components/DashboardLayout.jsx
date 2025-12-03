@@ -60,6 +60,12 @@ function DashboardLayout({ children, userName }) {
             Good Morning, <span className="text-opsly-purple">{displayName}</span>
           </h2>
           <div className="flex items-center gap-6">
+            <button
+              onClick={() => navigate('/support-us')}
+              className="px-4 py-2 rounded-full bg-opsly-purple text-white text-sm font-medium hover:bg-purple-700 transition border border-purple-500/60"
+            >
+              Support Us
+            </button>
             <FaSearch className="text-xl text-white cursor-pointer hover:text-gray-300 transition" />
             <FaBell className="text-xl text-white cursor-pointer hover:text-gray-300 transition" />
             <div className="relative">
