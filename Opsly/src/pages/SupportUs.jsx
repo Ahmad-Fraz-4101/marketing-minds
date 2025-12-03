@@ -19,7 +19,7 @@ function SupportUs() {
               and it will be served at /qr-support.png
             */}
             <img
-              src="/qr-support.png"
+              src="/qr-support.jpeg"
               alt="Support us QR code"
               className="w-full h-full object-contain"
             />
