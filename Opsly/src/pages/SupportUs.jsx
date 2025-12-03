@@ -15,7 +15,7 @@ function SupportUs() {
           <div className="w-64 h-64 bg-opsly-dark rounded-xl flex items-center justify-center mb-4 border border-gray-700 overflow-hidden">
             
             <img
-              src="/qr-support.PNG"
+              src="/qr-support.jpeg"
               alt="Support us QR code"
               className="w-full h-full object-contain"
             />
