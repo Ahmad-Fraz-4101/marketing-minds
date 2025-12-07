@@ -4,11 +4,23 @@ import { HiCalendar } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getApiUrl } from '../config/api'
-import { getFacebookAnalytics, getInstagramAnalytics, postDynamic, getConnectionStatus } from '../services/marketingService'
+import { postDynamic, getConnectionStatus } from '../services/marketingService'
 import { useAuth } from '../contexts/AuthContext'
+import { useMarketing } from '../contexts/MarketingContext'
 
 function MarketingDashboard() {
   const { userId, isAuthenticated } = useAuth()
+  const { 
+    fbPosts, 
+    instaPosts, 
+    isFbLoading, 
+    isInstaLoading, 
+    fbError, 
+    instaError, 
+    fetchFbAnalytics, 
+    fetchInstaAnalytics 
+  } = useMarketing()
+  
   const [selectedPlatform, setSelectedPlatform] = useState('facebook')
   const [connectionStatus, setConnectionStatus] = useState({
     facebook: false,
@@ -29,12 +41,6 @@ function MarketingDashboard() {
   const [isPosting, setIsPosting] = useState(false)
   const [postError, setPostError] = useState(null)
   const [postSuccess, setPostSuccess] = useState(null)
-  const [fbPosts, setFbPosts] = useState([])
-  const [isFbLoading, setIsFbLoading] = useState(true)
-  const [fbError, setFbError] = useState(null)
-  const [instaPosts, setInstaPosts] = useState([])
-  const [isInstaLoading, setIsInstaLoading] = useState(true)
-  const [instaError, setInstaError] = useState(null)
 
   useEffect(() => {
     const fetchConnectionStatus = async () => {
@@ -51,36 +57,16 @@ function MarketingDashboard() {
       }
     }
 
-    const fetchFbAnalytics = async () => {
-      try {
-        const data = await getFacebookAnalytics()
-        setFbPosts(data?.analytics || [])
-        // If backend returns connection info we can set it here later
-      } catch (error) {
-        setFbError(error.message || 'Failed to load Facebook analytics')
-      } finally {
-        setIsFbLoading(false)
-      }
-    }
-
-    const fetchInstaAnalytics = async () => {
-      try {
-        const data = await getInstagramAnalytics()
-        setInstaPosts(data?.analytics || [])
-      } catch (error) {
-        setInstaError(error.message || 'Failed to load Instagram analytics')
-      } finally {
-        setIsInstaLoading(false)
-      }
-    }
-
     // Fetch connection status first
     if (isAuthenticated && userId) {
       fetchConnectionStatus()
     }
     
+    // Fetch posts using context (will use cache if available)
+    // Only fetch on mount or when auth changes, not when fetch functions change
     fetchFbAnalytics()
     fetchInstaAnalytics()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, userId])
 
   const handleConnectFacebook = () => {
