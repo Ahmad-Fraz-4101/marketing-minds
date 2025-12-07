@@ -128,7 +128,7 @@ def get_connection_status(
 ):
     """
     Check if user has a session_token (Facebook/Instagram connection).
-    Returns connection status for both platforms.
+    Returns connection status for both platforms and user name.
     """
     try:
         user_uuid = UUIDType(user_id)
@@ -140,7 +140,8 @@ def get_connection_status(
     if not user:
         return {
             "facebook": False,
-            "instagram": False
+            "instagram": False,
+            "name": None
         }
     
     # If user has session_token, both Facebook and Instagram are considered connected
@@ -148,5 +149,6 @@ def get_connection_status(
     
     return {
         "facebook": has_session_token,
-        "instagram": has_session_token
+        "instagram": has_session_token,
+        "name": user.name
     }
