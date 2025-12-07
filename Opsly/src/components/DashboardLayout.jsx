@@ -33,12 +33,12 @@ function DashboardLayout({ children, userName }) {
         <div className="w-12 h-12 bg-opsly-purple rounded-full flex items-center justify-center text-white text-xl font-bold mb-8">
           Ö
         </div>
-        <Link to="/customer-support" className={`mb-6 p-3 rounded-lg ${isActive('/customer-support') ? 'bg-blue-700' : 'hover:bg-blue-700'}`}>
+        {/* <Link to="/customer-support" className={`mb-6 p-3 rounded-lg ${isActive('/customer-support') ? 'bg-blue-700' : 'hover:bg-blue-700'}`}>
           <HiPhone className="text-2xl text-white" />
         </Link>
         <Link to="/marketing" className={`mb-6 p-3 rounded-lg ${isActive('/marketing') ? 'bg-blue-700' : 'hover:bg-blue-700'}`}>
           <HiChartBar className="text-2xl text-white" />
-        </Link>
+        </Link> */}
         <Link to="/finance" className={`mb-6 p-3 rounded-lg ${isActive('/finance') ? 'bg-blue-700' : 'hover:bg-blue-700'}`}>
           <HiFolder className="text-2xl text-white" />
         </Link>
@@ -112,4 +112,5 @@ function DashboardLayout({ children, userName }) {
 }
 
 export default DashboardLayout
+
 

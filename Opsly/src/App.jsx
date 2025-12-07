@@ -54,7 +54,7 @@ function App() {
               </ProtectedRoute>
             } 
           />
-          <Route 
+          {/* <Route 
             path="/finance" 
             element={
               <ProtectedRoute>
@@ -77,7 +77,7 @@ function App() {
                 <FinanceAnomaly />
               </ProtectedRoute>
             } 
-          />
+          /> */}
           <Route 
             path="/chatbot" 
             element={
