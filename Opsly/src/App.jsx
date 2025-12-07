@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
+import { MarketingProvider } from './contexts/MarketingContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import LandingPage from './pages/LandingPage'
 import LoginPage from './pages/LoginPage'
@@ -18,7 +19,8 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <Routes>
+        <MarketingProvider>
+          <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
@@ -94,7 +96,8 @@ function App() {
               </ProtectedRoute>
             } 
           />
-        </Routes>
+          </Routes>
+        </MarketingProvider>
       </AuthProvider>
     </Router>
   )
