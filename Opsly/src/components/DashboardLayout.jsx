@@ -58,13 +58,13 @@ function DashboardLayout({ children, userName }) {
         </Link>
         {/* <Link to="/customer-support" className={`mb-6 p-3 rounded-lg ${isActive('/customer-support') ? 'bg-blue-700' : 'hover:bg-blue-700'}`}>
           <HiPhone className="text-2xl text-white" />
-        </Link>
+        </Link> */}
         <Link to="/marketing" className={`mb-6 p-3 rounded-lg ${isActive('/marketing') ? 'bg-blue-700' : 'hover:bg-blue-700'}`}>
           <HiChartBar className="text-2xl text-white" />
-        </Link> */}
-        <Link to="/finance" className={`mb-6 p-3 rounded-lg ${isActive('/finance') ? 'bg-blue-700' : 'hover:bg-blue-700'}`}>
-          <HiFolder className="text-2xl text-white" />
         </Link>
+        {/* <Link to="/finance" className={`mb-6 p-3 rounded-lg ${isActive('/finance') ? 'bg-blue-700' : 'hover:bg-blue-700'}`}>
+          <HiFolder className="text-2xl text-white" />
+        </Link> */}
         <Link to="/chatbot" className={`mb-6 p-3 rounded-lg ${isActive('/chatbot') ? 'bg-blue-700' : 'hover:bg-blue-700'}`}>
           <HiChat className="text-2xl text-white" />
         </Link>
