@@ -4,7 +4,7 @@ import { HiCalendar } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getApiUrl } from '../config/api'
-import { getFacebookAnalytics, getInstagramAnalytics, postDynamic } from '../services/marketingService'
+import { getFacebookAnalytics, getInstagramAnalytics, postDynamic, getConnectionStatus } from '../services/marketingService'
 import { useAuth } from '../contexts/AuthContext'
 
 function MarketingDashboard() {
@@ -13,7 +13,7 @@ function MarketingDashboard() {
   const [connectionStatus, setConnectionStatus] = useState({
     facebook: false,
     linkedin: false,
-    instagram: true // Instagram is already connected
+    instagram: false
   })
   
   // Post scheduling form state
@@ -37,6 +37,20 @@ function MarketingDashboard() {
   const [instaError, setInstaError] = useState(null)
 
   useEffect(() => {
+    const fetchConnectionStatus = async () => {
+      try {
+        const status = await getConnectionStatus()
+        setConnectionStatus(prev => ({
+          ...prev,
+          facebook: status.facebook || false,
+          instagram: status.instagram || false
+        }))
+      } catch (error) {
+        console.error('Failed to fetch connection status:', error)
+        // Keep default values on error
+      }
+    }
+
     const fetchFbAnalytics = async () => {
       try {
         const data = await getFacebookAnalytics()
@@ -60,9 +74,14 @@ function MarketingDashboard() {
       }
     }
 
+    // Fetch connection status first
+    if (isAuthenticated && userId) {
+      fetchConnectionStatus()
+    }
+    
     fetchFbAnalytics()
     fetchInstaAnalytics()
-  }, [])
+  }, [isAuthenticated, userId])
 
   const handleConnectFacebook = () => {
     // OAuth redirects require browser navigation, not fetch/axios
@@ -203,12 +222,19 @@ function MarketingDashboard() {
               <FaInstagram className="text-4xl" style={{ background: 'linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }} />
               <div>
                 <h3 className="text-xl font-semibold text-white">Instagram</h3>
-                <p className="text-sm text-green-400">Connected</p>
+                <p className={`text-sm ${connectionStatus.instagram ? 'text-green-400' : 'text-gray-400'}`}>
+                  {connectionStatus.instagram ? 'Connected' : 'Not Connected'}
+                </p>
               </div>
             </div>
-            <p className="text-gray-300 mb-4 text-sm">Your account is connected and ready to post</p>
-            <button className="w-full py-2 bg-opsly-purple text-white rounded-lg hover:bg-opacity-90 transition">
-              Disconnect
+            <p className="text-gray-300 mb-4 text-sm">
+              {connectionStatus.instagram ? 'Your account is connected and ready to post' : 'Connect your account to start posting'}
+            </p>
+            <button 
+              disabled={connectionStatus.instagram}
+              className="w-full py-2 bg-opsly-purple text-white rounded-lg hover:bg-opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {connectionStatus.instagram ? 'Connected' : 'Connect Account'}
             </button>
           </div>
         </div>
