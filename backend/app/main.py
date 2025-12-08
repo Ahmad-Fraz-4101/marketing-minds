@@ -16,6 +16,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from uuid import UUID as UUIDType
 
 
+
 load_dotenv()
 
 app = FastAPI()
