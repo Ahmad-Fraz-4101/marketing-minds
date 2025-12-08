@@ -182,17 +182,13 @@ function LoginPage() {
         }}></div>
 
         <div className="relative z-10 flex flex-col items-center">
-          {/* 3D Character Placeholder - Using a styled div to represent the character */}
-          <div className="relative mb-8">
-            <div className="w-64 h-80 bg-gradient-to-br from-gray-400 to-gray-600 rounded-2xl flex items-center justify-center relative" style={{
-              boxShadow: '0 0 40px rgba(147, 51, 234, 0.5)',
-              border: '2px solid rgba(147, 51, 234, 0.3)'
-            }}>
-              <div className="text-6xl">👨‍💻</div>
-            </div>
-            {/* Floating Shapes */}
-            <div className="absolute -top-8 -left-8 w-16 h-16 bg-opsly-purple opacity-60 rounded-lg transform rotate-45"></div>
-            <div className="absolute -bottom-8 -right-8 w-20 h-12 bg-green-400 opacity-60 rounded-full"></div>
+          {/* Illustration */}
+          <div className="relative mb-8 w-72 h-72 md:w-80 md:h-80 rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(147,51,234,0.35)] border border-purple-500/30 bg-white/5 backdrop-blur">
+            <img
+              src="/frame70.png"
+              alt="Welcome illustration"
+              className="w-full h-full object-contain"
+            />
           </div>
 
           {/* Promotional Text */}
