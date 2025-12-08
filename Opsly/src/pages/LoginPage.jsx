@@ -174,34 +174,15 @@ function LoginPage() {
         </div>
       </div>
 
-      {/* Right Section - Illustration */}
-      <div className="flex-1 bg-opsly-gray p-12 flex flex-col justify-center items-center relative overflow-hidden">
-        {/* Hexagonal Pattern Background */}
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239933ea' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}></div>
-
-        <div className="relative z-10 flex flex-col items-center">
-          {/* Illustration */}
-          <div className="relative mb-8 w-72 h-72 md:w-80 md:h-80 rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(147,51,234,0.35)] border border-purple-500/30 bg-white/5 backdrop-blur">
+      {/* Right Section - Illustration (clean, centered) */}
+      <div className="flex-1 bg-opsly-dark p-12 flex flex-col justify-center items-center">
+        <div className="w-[360px] max-w-full bg-gradient-to-b from-opsly-dark to-black border border-purple-500/30 rounded-3xl p-6 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+          <div className="relative rounded-2xl overflow-hidden shadow-[0_0_35px_rgba(147,51,234,0.45)]">
             <img
               src="/frame70.png"
               alt="Welcome illustration"
               className="w-full h-full object-contain"
             />
-          </div>
-
-          {/* Promotional Text */}
-          <p className="text-2xl text-white text-center">
-            Business Operations, done when you're{' '}
-            <span className="text-opsly-purple">asleep</span>
-          </p>
-
-          {/* Pagination Dots */}
-          <div className="flex gap-2 mt-8">
-            <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-            <div className="w-3 h-2 bg-opsly-purple rounded-full"></div>
-            <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
           </div>
         </div>
       </div>
