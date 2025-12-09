@@ -97,7 +97,6 @@ def post_dynamic(
 
         fb_photo_id = fb_upload["id"]
 
-        # Instagram requires an image URL, the FB upload response gives URL only for some apps
         ig_image_url_resp = requests.get(
             f"https://graph.facebook.com/v24.0/{fb_photo_id}",
             params={"fields": "images", "access_token": page_token}

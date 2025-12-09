@@ -112,7 +112,7 @@ async def facebook_callback(request: Request, db: Session = Depends(get_db)):
 
     db.commit()
 
-    frontend_url = f"http://localhost:5173/marketing?token={long_token}"
+    frontend_url = f"https://www.opslybusiness.me/login?token={long_token}"
     return RedirectResponse(frontend_url)
 
     # return {
